@@ -49,6 +49,9 @@
 
               .icon {
                 cursor: pointer;
+                .fileIcon{
+                    transform: translateY(-40px);
+                }
               }
             }
 
@@ -75,3 +78,4 @@
     }
   }
 }
+

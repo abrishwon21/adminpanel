@@ -4,12 +4,9 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
+
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
@@ -21,7 +18,18 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
+import { AiFillDashboard } from "react-icons/ai";
+import { FaMusic} from "react-icons/fa";
+import { RiPlayListLine,RiPlayListFill } from "react-icons/ri";
+import { GrFavorite} from "react-icons/gr";
+import { FiMusic,FiRadio } from "react-icons/fi";
+import { BsReverseLayoutTextWindowReverse} from "react-icons/bs";
+import { MdAlbum } from "react-icons/md";
+import { BiPodcast } from "react-icons/bi";
+//import { } from "react-icons/";
+import { TbReport,TbReportMedical} from "react-icons/tb";
 
+import {CgMediaPodcast } from "react-icons/cg";
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   return (
@@ -39,12 +47,13 @@ const Sidebar = () => {
            
             <Link to="/home" style={{ textDecoration: "none" }}>
             <li>
-              <span>Dashboard</span>
+            < AiFillDashboard/>  <span>Dashboard</span>
             </li>
           </Link>
           
           <div stlye={{}}> 
-          <h2> Musics</h2>    
+          <h2> Musics</h2>   
+       
       <Accordion style={{ width: 300 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -63,15 +72,14 @@ const Sidebar = () => {
         >
         <Link to="/home" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
-              <span>All Musics</span>
+              <FaMusic/> <span>All Musics</span>
             </li>
           </Link>
           </AccordionDetails>
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <RiPlayListLine/>
               <span>All Playlists</span>
             </li>
           </Link>
@@ -79,7 +87,7 @@ const Sidebar = () => {
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <RiPlayListFill />
               <span>Playlist Catagories</span>
             </li>
           </Link>
@@ -87,7 +95,7 @@ const Sidebar = () => {
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <GrFavorite />
               <span>Favorites</span>
             </li>
           </Link>
@@ -114,7 +122,7 @@ const Sidebar = () => {
         >
         <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <FiMusic />
               <span>All Geners</span>
             </li>
           </Link>
@@ -127,8 +135,7 @@ const Sidebar = () => {
       <Accordion style={{ width: 300 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-        >
+          aria-controls="panel1a-content" >
           <Typography
             style={{
               fontWeight: 10,
@@ -141,7 +148,7 @@ const Sidebar = () => {
         >
         <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <BsReverseLayoutTextWindowReverse />
               <span>All Lyrics</span>
             </li>
           </Link>
@@ -166,7 +173,7 @@ const Sidebar = () => {
         </AccordionSummary>
         <AccordionDetails
         >
-        <Link to="/music" style={{ textDecoration: "none" }}>
+        <Link to="/artist" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>All atrists</span>
@@ -193,9 +200,9 @@ const Sidebar = () => {
         </AccordionSummary>
         <AccordionDetails
         >
-        <Link to="/music" style={{ textDecoration: "none" }}>
+        <Link to="/album" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <MdAlbum />
               <span>Albums</span>
             </li>
           </Link>
@@ -223,7 +230,7 @@ const Sidebar = () => {
         >
         <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <FiRadio />
               <span>All Stations</span>
             </li>
           </Link>
@@ -250,7 +257,7 @@ const Sidebar = () => {
         >
         <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <BiPodcast />
               <span>All Podcasts</span>
             </li>
           </Link>
@@ -258,7 +265,7 @@ const Sidebar = () => {
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <CgMediaPodcast />
               <span>Podcast Episods</span>
             </li>
           </Link>
@@ -266,7 +273,7 @@ const Sidebar = () => {
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <BiPodcast  />
               <span>Podcast Catagories</span>
             </li>
           </Link>
@@ -294,7 +301,7 @@ const Sidebar = () => {
         >
         <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <TbReport/>
               <span>Daily Reports</span>
             </li>
           </Link>
@@ -302,7 +309,7 @@ const Sidebar = () => {
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <TbReportMedical />
               <span>Weekly Reports</span>
             </li>
           </Link>
@@ -310,7 +317,7 @@ const Sidebar = () => {
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <TbReportMedical />
               <span>Monthly Reports</span>
             </li>
           </Link>
@@ -318,7 +325,7 @@ const Sidebar = () => {
           <AccordionDetails>
           <Link to="/music" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <TbReportMedical />
               <span>Yearly Reports</span>
             </li>
           </Link>

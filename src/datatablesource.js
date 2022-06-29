@@ -1,3 +1,7 @@
+import { useSelector } from 'react-redux'
+import React, {useState} from 'react'
+
+
 export const userColumns = [
   { field: "id", headerName: "ID", width: 70 },
   {
@@ -14,14 +18,14 @@ export const userColumns = [
     },
   },
   {
-    field: "email",
-    headerName: "Email",
+    field: "name",
+    headerName: "Name",
     width: 230,
   },
 
   {
-    field: "age",
-    headerName: "Age",
+    field: "description",
+    headerName: "Description",
     width: 100,
   },
   {
@@ -39,7 +43,8 @@ export const userColumns = [
 ];
 
 //temporary data
-export const userRows = [
+ export const userRows = [
+
   {
     id: 1,
     username: "alex",
@@ -84,3 +89,4 @@ export const userRows = [
   
   
 ];
+

@@ -5,7 +5,10 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useState, useRef, useEffect } from "react";
 import { artistActions } from '../../Store/artist-slice'
 import { useSelector, useDispatch} from 'react-redux'
-const New = ({ inputs, title }) => {
+import Axios from 'axios'
+import { BASE_URL } from "../../env";
+
+const NewArtistForm = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [artdata, setArtData ] = useState();
   const artNameRef = useRef();
@@ -17,42 +20,54 @@ const New = ({ inputs, title }) => {
   
   setArtData(testd);
  },[])
- const handleAddState = ()=>{
+
+
+ const onSubmitHandler = async (e) => {
+  const endpt = BASE_URL + "/artist/";
+  const formData = new FormData();
   let enteredName = artNameRef.current.value;
   let enteredArtDesc = artDescriptionRef.current.value;
 
-  dispatch(
-    artistActions.addArtist({aName: enteredName,aDesc: enteredArtDesc})
-  )
+  formData.append("artist_name", enteredName);
+  formData.append("artist_avatar", file);
+  formData.append("artist_description", enteredArtDesc);
 
-  
-  console.log(testd);
- }
+  e.preventDefault();
+  const createArtist = await Axios.post(endpt, formData).then((res) => {
+    if(res.status===201){
+      dispatch(
+        artistActions.toggler()
+      )
+      alert('Successfully created!')
+    }
+  });
+};
  
   return (
     <div className="new">
-      <Sidebar />
+    
       <div className="newContainer">
-        <Navbar />
+      
         <div className="top">
           <h1>{title}</h1>
         </div>
         <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
-          </div>
+
           <div className="right">
-            <form onSubmit={(e)=>e.preventDefault()}>
-              <div className="formInput">
+            <form onSubmit={onSubmitHandler}>
+              <div className="formInput" style={{display:'flex', alignItems: 'center', flexDirection:'column',}}>
+              <div className="left">
+              <img
+                src={
+                  file
+                    ? URL.createObjectURL(file)
+                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                }
+                alt=""
+              />
+            </div>
                 <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                   <DriveFolderUploadOutlinedIcon className="fileIcon icon" style={{transform: 'translateY(-50px)'}} />
                 </label>
                 <input
                   type="file"
@@ -74,7 +89,7 @@ const New = ({ inputs, title }) => {
                 </div>
 
              
-              <button onClick={handleAddState}>Send</button>
+              <button>Send</button>
             </form>
           </div>
         </div>
@@ -83,4 +98,4 @@ const New = ({ inputs, title }) => {
   );
 };
 
-export default New;
+export default NewArtistForm;

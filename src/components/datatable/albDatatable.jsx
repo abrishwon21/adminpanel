@@ -4,24 +4,23 @@ import { userColumns, userRows} from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector,useDispatch } from 'react-redux'
-import { artistActions } from "../../Store/artist-slice";
+import { albumActions } from "../../Store/album-slice";
 import { uiActions } from "../../Store/ui-slice";
-import NewArtistForm from "../../pages/new/newArtistForm";
+import Axios from 'axios'
+import {BASE_URL} from '../../env'
 import NewAlbumForm from "../../pages/new/newAlbumForm";
-import Axios from 'axios';
-import { BASE_URL } from "../../env";
-const Datatable = (props) => {
-  const [data, setData] = useState(userRows);
+const AlbumDatatable = (props) => {
+  const [data, setData] = useState("");
   
   const dispatch = useDispatch()
-  const toggle = useSelector((state)=>state.artist.isNewFormVisible)
+  const toggle = useSelector((state)=>state.album.isNewFormVisible)
   const isLoading = useSelector((state)=>state.ui.isLoading)
   
   const handleDelete = async(id) => {
     //setData(data.filter((item) => item.id !== id));
     dispatch(uiActions.showLoading());
     
-     let endpt = BASE_URL + "/artist/"+id+"/delete/";
+     let endpt = BASE_URL + "/album/"+id+"/delete/";
       const resp = await Axios.delete(endpt);
       if(resp.status===204){
         alert('you have deleted the artist!')
@@ -35,8 +34,8 @@ const Datatable = (props) => {
 
   };
 
-  console.log(data)
- const artistRow = [
+ 
+ const albumRow = [
   
  ]
 
@@ -48,9 +47,8 @@ const Datatable = (props) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={"/artist/" + params.row.id} style={{ textDecoration: "none" }}>
+            <Link to="/users/test" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
-
             </Link>
             <div
               className="deleteButton"
@@ -65,7 +63,7 @@ const Datatable = (props) => {
   ];
   
   const toggleHandler = ()=>{
-       dispatch(artistActions.toggler())
+       dispatch(albumActions.toggler())
   }
 
   return (
@@ -77,7 +75,8 @@ const Datatable = (props) => {
 
       </div>}
     
-     {props.dtype==='artist' ? toggle && <NewArtistForm/>:''}
+     
+     {toggle && <NewAlbumForm/>}
       {isLoading &&
         <DataGrid
         className="datagrid"
@@ -92,4 +91,4 @@ const Datatable = (props) => {
   );
 };
 
-export default Datatable;
+export default AlbumDatatable;
