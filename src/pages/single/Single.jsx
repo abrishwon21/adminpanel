@@ -5,6 +5,35 @@ import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 
 const Single = () => {
+  const [artistData, setArtistData] = useState([]);
+  const { artistID } = useParams();
+  useEffect(() => {
+    getSingleUser();
+  }, []);
+  const getSingleUser = async () => {
+    await Axios.get(`${BASE_URL}/artist/${artistID}`).then((result) => {
+      if (result.status == 200) {
+        setArtistData(result.data);
+      }
+    });
+    console.log(artistData);
+  };
+  const onSubmitHandler = async (e) => {
+    const endpt = `${BASE_URL}/artist/${artistID}/update`;
+    const formData = new FormData();
+    formData.append("artist_name", artistData.artist_name);
+    formData.append("artist_avatar", artistData.artist_avatar);
+    formData.append("artist_description", artistData.artist_description);
+
+    e.preventDefault();
+    const createArtist = await Axios.put(endpt, formData).then((res) => {
+      if (res.status == 200) {
+        alert("Edited!");
+      }
+    });
+  };
+
+
   return (
     <div className="single">
       <Sidebar />
@@ -21,13 +50,10 @@ const Single = () => {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                <h1 className="itemTitle">{artistData.artist_name}</h1>
+             
                 <div className="detailItem">
-                  <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
-                </div>
-                <div className="detailItem">
-                  <span className="itemKey">Phone:</span>
+                  <span className="itemKey">Name:</span>
                   <span className="itemValue">+1 2345 67 89</span>
                 </div>
                 <div className="detailItem">
