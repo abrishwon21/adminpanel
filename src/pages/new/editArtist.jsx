@@ -10,7 +10,7 @@ import { BASE_URL } from "../../env";
 import {useParams} from 'react-router-dom';
 const EditArtist = ({ inputs, title }) => {
   const [file, setFile] = useState("");
-  const [artistData, setArtistData ] = useState();
+  const [artistData, setArtistData ] = useState([]);
   const artNameRef = useRef();
   const artDescriptionRef = useRef();
 
@@ -25,15 +25,16 @@ const EditArtist = ({ inputs, title }) => {
 }, []);
 const getSingleUser = async () => {
   await Axios.get(`${BASE_URL}/artist/${artistId}`).then((result) => {
-    if (result.status == 200) {
-      setArtistData(result.data); ``
+    if (result.status === 200) {
+      setArtistData(result.data);
     }
   });
   console.log(artistData);
 };
 
  const onSubmitHandler = async (e) => {
-  const endpt = BASE_URL + "/artist/";
+  e.preventDefault();
+  const endpt = `${BASE_URL}/artist/${artistId}/update`;
   const formData = new FormData();
   let enteredName = artNameRef.current.value;
   let enteredArtDesc = artDescriptionRef.current.value;
@@ -42,8 +43,8 @@ const getSingleUser = async () => {
   formData.append("artist_avatar", file);
   formData.append("artist_description", enteredArtDesc);
 
-  e.preventDefault();
-  const editArtist = await Axios.put(endpt, formData).then((res) => {
+  
+  const editArtist = await Axios.patch(endpt, formData).then((res) => {
     if(res.status===201){
       dispatch(
         artistActions.toggler()
@@ -69,9 +70,10 @@ const getSingleUser = async () => {
               <div className="left">
               <img
                 src={
+                
                   file
                     ? URL.createObjectURL(file)
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                    : artistData.artist_avatar
                 }
                 alt=""
               />
@@ -90,13 +92,12 @@ const getSingleUser = async () => {
               
                 <div className="formInput">
                   <label>Artist Name</label>
-                  <input type="text"  />
- {console.log(artistData)}
+                  <input type="text" placeholder={artistData.artist_name} ref={artNameRef} />
                 </div>
                               
                 <div className="formInput">
                   <label>About Artist</label>
-                  <input type="text"   />
+                  <input type="text"  placeholder={artistData.artist_description} ref={artDescriptionRef} />
                 </div>
 
              

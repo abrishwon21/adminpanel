@@ -4,15 +4,27 @@ const artistSlice = createSlice({
     name:'artist',
     initialState: {
         artistList:[
-                   {aName:'Teddy', aDesc:'Tedros is the best'},
-              ],
+            {
+                id:'',
+                name:'',
+                img:'',
+                description:''
+        }
+        ],
         artistId: 0,
         isNewFormVisible: false,
    },
     reducers: {
         addArtist(state, action){
-            const newArtist =  action.payload;
-            state.artistList.push(newArtist);
+            const id =  action.payload.id;
+            const name =  action.payload.name;
+            const img =  action.payload.img;
+            const description =  action.payload.description;
+            
+           
+            for(let i = 0; i<action.payload.length; i++){
+                state.artistList.push({id,name,img,description});
+            }
         },
         toggler(state){
              state.isNewFormVisible=!state.isNewFormVisible;

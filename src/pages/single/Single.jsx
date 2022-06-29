@@ -5,6 +5,7 @@ import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 
 const Single = () => {
+  /*
   const [artistData, setArtistData] = useState([]);
   const { artistID } = useParams();
   useEffect(() => {
@@ -33,7 +34,7 @@ const Single = () => {
     });
   };
 
-
+*/
   return (
     <div className="single">
       <Sidebar />
@@ -50,7 +51,7 @@ const Single = () => {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">{artistData.artist_name}</h1>
+                <h1 className="itemTitle"></h1>
              
                 <div className="detailItem">
                   <span className="itemKey">Name:</span>

@@ -1,31 +1,31 @@
 import "./list.scss"
 import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
-import Datatable from "../../components/datatable/Datatable"
+import Datatable from "../../components/datatable/trackDatatable"
 import { BASE_URL } from "../../env";
 import Axios from 'axios';
 import {useState, useEffect} from 'react';
 import {useDispatch } from 'react-redux';
 import { uiActions } from "../../Store/ui-slice";
-import {artistActions} from '../../Store/artist-slice'
+import {trackActions} from '../../Store/track-slice'
 import {useSelector } from "react-redux"
-const List = () => {
+const TrackList = () => {
   const [datas, setDatas] = useState([]);
  useEffect(()=>{
-  artistList();
+  trackList();
   
 },
 [])
 const dispatch=useDispatch();
 const dtat = [
 ]
-  const artistList = async () => {
-    let endpt = BASE_URL + "/artist/";
+  const trackList = async () => {
+    let endpt = BASE_URL + "/track/";
     const resp = await Axios.get(endpt);
     if(resp.status===200){
     
       setDatas(resp.data);
-      dispatch(artistActions.addArtist(resp.data))
+      dispatch(trackActions.addTrack(resp.data))
       
       dispatch(uiActions.showLoading());
     }
@@ -35,18 +35,18 @@ const dtat = [
     
   };
  
-  const artList = []
-  datas.map((res)=>(artList.push({id:res.id, name:res.artist_name, img:res.artist_avatar, description:res.artist_description})));
+  const trackLists = []
+  datas.map((res)=>(trackLists.push({id:res.id, name:res.track_name, trackfile:res.track_file, description:res.track_description})));
   return (
     <div className="list">
       <Sidebar/>
       <div className="listContainer">
         <Navbar/>
-        <Datatable dta={artList} dtype='artist'/>
+        <Datatable dta={trackLists} dtype='artist'/>
       
       </div>
     </div>
   )
 }
 
-export default List
+export default TrackList

@@ -1,6 +1,7 @@
 {
   "name": "lamadmin",
   "version": "0.1.0",
+  "Home":"media.kinideas.com",
   "private": true,
   "dependencies": {
     "@coreui/coreui": "^4.1.6",

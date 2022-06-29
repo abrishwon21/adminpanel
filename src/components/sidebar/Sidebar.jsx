@@ -70,9 +70,9 @@ const Sidebar = () => {
         </AccordionSummary>
         <AccordionDetails
         >
-        <Link to="/home" style={{ textDecoration: "none" }}>
+        <Link to="/track" style={{ textDecoration: "none" }}>
             <li>
-              <FaMusic/> <span>All Musics</span>
+              <FaMusic/> <span>Tracks</span>
             </li>
           </Link>
           </AccordionDetails>

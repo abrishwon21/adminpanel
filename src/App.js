@@ -1,6 +1,7 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
+import TrackList from "./pages/list/trackList";
 import AlbumList from "./pages/list/albumList";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -43,6 +44,15 @@ function App() {
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
             </Route>
+
+            <Route path="track">
+            <Route index element={<TrackList />} />
+            <Route path=":trackId" element={<EditArtist />} />
+            <Route
+              path="new"
+              element={<New inputs={productInputs} title="Add New Product" />}
+            />
+          </Route>
           </Route>
         </Routes>
       </BrowserRouter>
