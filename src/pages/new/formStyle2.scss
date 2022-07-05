@@ -1,0 +1,111 @@
+
+.form{
+    margin: 2px;
+    padding: 3px;
+    padding-left: 40px;
+}
+.input{
+    padding: 3px;
+    margin: 4px;
+}
+.form-box input, select{
+    display: block;
+    width: 100%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: .9vw 0 ;
+    border:0;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.form-box input,label{
+    display: block;
+    width: 100%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: .9vw 0 ;
+    border:0;
+    border-radius: 5px;
+}
+.formInput{
+    display: block;
+    width: 100%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: .9vw 0 ;
+    border:0;
+    border-radius: 5px;   
+}
+.input{
+         display: block;
+        width: 100%;
+        padding: .5rem .8rem .5rem .8rem;
+        margin: .9vw 0 ;
+        border:0;
+        border-radius: 5px;   
+        background-color: rgb(248, 191, 4);
+    
+}
+.formInput {
+    width: 40%;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .icon {
+        cursor: pointer;
+        .fileIcon{
+            transform: translateY(-40px);
+        }
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: 5px;
+      border-bottom: 1px solid gray;
+    }
+  }
+
+
+.form-box textarea{
+    height: 15vh;
+}
+* h3{
+margin: 20px;
+padding: 5px;
+}
+.form-select{
+background-color: rgb(248, 191, 4);
+    
+}
+
+
+
+option{
+    padding: 11 px;
+}
+.imageinput {
+    width: 90%;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .icon {
+        cursor: pointer;
+        .fileIcon{
+            transform: translateY(-40px);
+            background-color: chocolate;
+        }
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: 5px;
+      border: none;
+
+      border-bottom: 1px solid gray;
+    }
+  }

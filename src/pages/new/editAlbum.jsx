@@ -7,10 +7,11 @@ import { albumActions } from '../../Store/album-slice'
 import { useSelector, useDispatch} from 'react-redux'
 import Axios from 'axios'
 import { BASE_URL } from "../../env";
-
+import {useParams} from 'react-router-dom';
 const NewAlbumForm = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [artData, setArtData ] = useState([]);
+  const [albumData, setAlbumData] = useState([]);
   const albNameRef = useRef();
   const [artistIDRef,setArtIdRef] = useState();
   const albumReleaseDate = useRef();
@@ -34,9 +35,15 @@ useEffect(() => {
   getArtist() 
 }, []);
 
+useEffect(() => {
+ getSingleAlbum();
+}, []);
+const { albumId } = useParams();
+
  const onSubmitHandler = async (e) => {
   e.preventDefault();
-  const endpt = BASE_URL+ "album/";
+  
+  const endpt = `${BASE_URL}album/${albumId}/update/`;
   const formData = new FormData();
   let enteredName = albNameRef.current.value;
   let enteredAlbDesc = albDescriptionRef.current.value;
@@ -51,12 +58,12 @@ useEffect(() => {
   
 
  
-  const createArtist = await Axios.post(endpt, formData).then((res) => {
+  const createArtist = await Axios.put(endpt, formData).then((res) => {
     if(res.status===201){
       dispatch(
         albumActions.toggler()
       )
-      alert('Successfully created!')
+      alert('Successfully Updated!')
       console.log(res.data)
     }else{
       alert('please try again')
@@ -64,11 +71,21 @@ useEffect(() => {
   });
 };
  
+
+const getSingleAlbum= async () => {
+ await Axios.get(`${BASE_URL}album/${albumId}`).then((result) => {
+   if (result.status === 200) {
+     setAlbumData(result.data);
+   }
+ });
+ console.log(albumData);
+};
+
   return (
     <div className="new">
-    
+       <Sidebar />
       <div className="newContainer">
-      
+          <Navbar />
         <div className="top">
           <h1>{title}</h1>
         </div>
@@ -78,7 +95,7 @@ useEffect(() => {
             <form onSubmit={onSubmitHandler}>
                 <div className="row">
                 <div className="col">
-                  <h3>Select Artists</h3>
+                  <h3>Artist</h3>
                   <select
                     className="form-select form-select mb-3"
                     name="artist"
@@ -86,7 +103,7 @@ useEffect(() => {
                     onChange={(e) => {
                       setArtIdRef(e.target.value);
                     }}>
-                    <option>Open this select menu</option>
+                    <option>select</option>
                     {artData.map((res) => (
                       <option key={res.id} value={res.id}>
                         {res.artist_name} 
@@ -95,13 +112,13 @@ useEffect(() => {
                   </select>
                 </div>
                 <div className="col">
-                  <h3>Select Genre</h3>
+                  <h3>Genre</h3>
                   <select
                     className="form-select form-select mb-3"
                     name="artist"
                     aria-label=".form-select example"
                   >
-                    <option>Open this select menu</option>
+                    <option>please choose genre</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
@@ -114,7 +131,7 @@ useEffect(() => {
                 src={
                   file
                     ? URL.createObjectURL(file)
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                    : albumData.album_cover
                 }
                 alt=""
               />
@@ -133,18 +150,23 @@ useEffect(() => {
               
                 <div className="formInput">
                   <label>Album Name</label>
-                  <input type="text" placeholder="please enter name" ref={albNameRef}/>
+                  <input type="text" placeholder={albumData.album_name} ref={albNameRef}/>
                 </div>
 
             <div className="formInput">
               <label>Date</label>
-              <input type="date" placeholder="release date" ref={albumReleaseDate} />
+              <input type="text" placeholder={albumData.album_release_date}
+             
+              style={{onfocus:"(this.type='date')",
+              onblur:"(this.type='text')"}}
+              ref={albumReleaseDate} />
+              
             </div>                
                 <div className="formInput">
                   <label>About Album</label>
-                  <input type="text" placeholder="please enter name" ref={albDescriptionRef} />
+                  <input type="text" placeholder={albumData.album_description} ref={albDescriptionRef} />
                 </div>
-              <button>Create Album</button>
+              <button>Update Album</button>
             </form>
           </div>
         </div>

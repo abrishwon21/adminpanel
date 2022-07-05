@@ -12,6 +12,18 @@
     }
   }
 
+  .link{
+    text-decoration: none;
+    color: green;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid green;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
   .status {
     padding: 5px;
     border-radius: 5px;
@@ -24,5 +36,37 @@
       color: goldenrod;
       background-color: rgba(189, 189, 3, 0.103);
     }
+  }
+}
+
+.icons{
+  color: #ffcc20;
+  cursor:pointer;
+}
+.deleteIcon{
+  color: #f11a1a;
+  cursor:pointer;
+}
+
+
+.cellAction {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .viewButton {
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: darkblue;
+    border: 1px dotted rgba(0, 0, 139, 0.596);
+    cursor: pointer;
+  }
+  
+  .deleteButton {
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: crimson;
+    border: 1px dotted rgba(220, 20, 60, 0.6);
+    cursor: pointer;
   }
 }

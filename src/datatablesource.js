@@ -42,6 +42,97 @@ export const userColumns = [
   },
 ];
 
+//album columns
+
+export const albumColumns = [
+  { field: "id", headerName: "ID", width: 70 },
+  {
+    field: "album",
+    headerName: "Cover Image",
+    width: 230,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={params.row.img} alt="avatar" />
+          {params.row.albumName}
+        </div>
+      );
+    },
+  },
+  {
+    field: "name",
+    headerName: "Album Name",
+    width: 230,
+  },
+
+  {
+    field: "description",
+    headerName: "Album Description",
+    width: 100,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 160,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.status}`}>
+          {params.row.status}
+        </div>
+      );
+    },
+  },
+];
+//end of album column
+
+
+//album columns
+
+export const trackColumns = [
+  { field: "id", headerName: "ID", width: 70 },
+  {
+    field: "track",
+    headerName: "Cover Image",
+    width: 230,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={params.row.img} alt="avatar" />
+          {params.row.albumName}
+        </div>
+      );
+    },
+  },
+  {
+    field: "name",
+    headerName: "Artist Name",
+    width: 230,
+  },
+  {
+    field: "trackfile",
+    headerName: "Play",
+    width: 230,
+  },
+
+  {
+    field: "description",
+    headerName: "Track Description",
+    width: 100,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 160,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.status}`}>
+          {params.row.status}
+        </div>
+      );
+    },
+  },
+];
+//end of track column
 //temporary data
  export const userRows = [
 

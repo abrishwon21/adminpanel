@@ -24,7 +24,7 @@ const EditArtist = ({ inputs, title }) => {
   getSingleUser();
 }, []);
 const getSingleUser = async () => {
-  await Axios.get(`${BASE_URL}/artist/${artistId}`).then((result) => {
+  await Axios.get(`${BASE_URL}artist/${artistId}`).then((result) => {
     if (result.status === 200) {
       setArtistData(result.data);
     }
@@ -34,7 +34,7 @@ const getSingleUser = async () => {
 
  const onSubmitHandler = async (e) => {
   e.preventDefault();
-  const endpt = `${BASE_URL}/artist/${artistId}/update`;
+  const endpt = `${BASE_URL}artist/${artistId}/update/`;
   const formData = new FormData();
   let enteredName = artNameRef.current.value;
   let enteredArtDesc = artDescriptionRef.current.value;
@@ -49,8 +49,11 @@ const getSingleUser = async () => {
       dispatch(
         artistActions.toggler()
       )
-      alert('Successfully created!')
+      alert('Successfully updated!')
+      window.location.replace("localhost:3000/album");
     }
+ 
+    window.location.replace("localhost:3000/album");
   });
 };
  
@@ -101,7 +104,7 @@ const getSingleUser = async () => {
                 </div>
 
              
-              <button>Send</button>
+              <button>update</button>
             </form>
           </div>
         </div>

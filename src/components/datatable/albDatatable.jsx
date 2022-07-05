@@ -1,6 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows} from "../../datatablesource";
+import { albumColumns, userRows} from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector,useDispatch } from 'react-redux'
@@ -16,6 +16,9 @@ const AlbumDatatable = (props) => {
   const toggle = useSelector((state)=>state.album.isNewFormVisible)
   const isLoading = useSelector((state)=>state.ui.isLoading)
   
+  useEffect(()=>{
+    albumList();
+  },[])
   const handleDelete = async(id) => {
     //setData(data.filter((item) => item.id !== id));
     dispatch(uiActions.showLoading());
@@ -35,10 +38,16 @@ const AlbumDatatable = (props) => {
   };
 
  
- const albumRow = [
-  
- ]
-
+  const albumList = async () => {
+    let endpt = BASE_URL + "/album/";
+    const resp = await Axios.get("https://jsonplaceholder.typicode.com/posts");
+    if(resp.status===200){
+    
+      setData(resp.data);
+     
+    }
+    dispatch(uiActions.showLoading());
+  };
   const actionColumn = [
     {
       field: "action",
@@ -77,11 +86,11 @@ const AlbumDatatable = (props) => {
     
      
      {toggle && <NewAlbumForm/>}
-      {isLoading &&
+      {
         <DataGrid
         className="datagrid"
-        rows={props.dta}
-        columns={userColumns.concat(actionColumn)}
+        rows={data}
+        columns={albumColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

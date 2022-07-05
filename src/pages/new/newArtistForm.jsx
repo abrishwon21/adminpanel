@@ -23,7 +23,7 @@ const NewArtistForm = ({ inputs, title }) => {
 
 
  const onSubmitHandler = async (e) => {
-  const endpt = BASE_URL + "/artist/";
+  const endpt = BASE_URL + "artist/";
   const formData = new FormData();
   let enteredName = artNameRef.current.value;
   let enteredArtDesc = artDescriptionRef.current.value;

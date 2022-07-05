@@ -9,32 +9,13 @@ import {useDispatch } from 'react-redux';
 import { uiActions } from "../../Store/ui-slice";
 import {artistActions} from '../../Store/artist-slice'
 import {useSelector } from "react-redux"
+import ArtistTable from '../../components/table/Table'
 const List = () => {
   const [datas, setDatas] = useState([]);
- useEffect(()=>{
-  artistList();
   
-},
-[])
 const dispatch=useDispatch();
 const dtat = [
 ]
-  const artistList = async () => {
-    let endpt = BASE_URL + "/artist/";
-    const resp = await Axios.get(endpt);
-    if(resp.status===200){
-    
-      setDatas(resp.data);
-      dispatch(artistActions.addArtist(resp.data))
-      
-      dispatch(uiActions.showLoading());
-    }
-
-    
-    
-    
-  };
- 
   const artList = []
   datas.map((res)=>(artList.push({id:res.id, name:res.artist_name, img:res.artist_avatar, description:res.artist_description})));
   return (
@@ -42,7 +23,7 @@ const dtat = [
       <Sidebar/>
       <div className="listContainer">
         <Navbar/>
-        <Datatable dta={artList} dtype='artist'/>
+        <ArtistTable/>
       
       </div>
     </div>

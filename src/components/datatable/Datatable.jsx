@@ -11,11 +11,31 @@ import NewAlbumForm from "../../pages/new/newAlbumForm";
 import Axios from 'axios';
 import { BASE_URL } from "../../env";
 const Datatable = (props) => {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState();
   
   const dispatch = useDispatch()
   const toggle = useSelector((state)=>state.artist.isNewFormVisible)
   const isLoading = useSelector((state)=>state.ui.isLoading)
+   const artistLists = [];
+useEffect(()=>{
+artistList();
+
+}, [])
+
+  const artistList = async () => {
+    let endpt = BASE_URL + "/artist/";
+    const resp = await Axios.get("https://jsonplaceholder.typicode.com/users");
+    if(resp.status===200){
+       resp.data.map((res)=>(artistLists.push({id:res.id, name:res.artist_name, img:res.artist_avatar, description:res.artist_description})));
+      
+       
+      dispatch(artistActions.addArtist(resp.data))
+      
+ 
+    }
+    dispatch(uiActions.showLoading());
+    
+  };
 
   const handleDelete = async(id) => {
     //setData(data.filter((item) => item.id !== id));
@@ -79,17 +99,17 @@ const Datatable = (props) => {
       </div>}
     
      {props.dtype==='artist' ? toggle && <NewArtistForm/>:''}
-      {isLoading &&
+      {
         <DataGrid
         className="datagrid"
-        rows={props.dta}
+        rows={data}
         
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
       />}
-     
+      {console.log(data)}
       {!isLoading && <h1> Loading . . .</h1>}
     </div>
   );
